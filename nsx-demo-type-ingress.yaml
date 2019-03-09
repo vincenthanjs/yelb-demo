@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nsx-demo
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nsx-demo
+    spec:
+      containers:
+      - name: nsx-demo
+        image: harbor.corp.local/1935/nsx-demo 
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nsx-demo
+  labels:
+    app: nsx-demo
+spec:
+  ports:
+    # the port that this service should serve on
+    - port: 80
+  selector:
+    app: nsx-demo
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nsx-demo-ingress
+spec:
+  rules:
+  - host: nsx.demo.corp.local
+    http:
+      paths:
+      - backend:
+          serviceName: nsx-demo
+          servicePort: 80

@@ -1,0 +1,64 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: yelb-ui
+spec:
+  podSelector:
+    matchLabels:
+      app: yelb-ui
+  ingress:
+  - from:
+    ports:
+      - port: 80
+        protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: yelb-appserver
+spec:
+  podSelector:
+    matchLabels:
+      app: yelb-appserver
+  ingress:
+  - from:
+      - podSelector:
+         matchLabels:
+           app: yelb-ui
+    ports:
+      - port: 4567
+        protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: redis-server 
+spec:
+  podSelector:
+    matchLabels:
+      app: redis-server
+  ingress:
+  - from:
+      - podSelector:
+         matchLabels:
+           app: yelb-appserver
+    ports:
+      - port: 6379
+        protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: yelb-db
+spec:
+  podSelector:
+    matchLabels:
+      app: yelb-db
+  ingress:
+  - from:
+      - podSelector:
+         matchLabels:
+           app: yelb-appserver
+    ports:
+      - port: 5432
+        protocol: TCP
