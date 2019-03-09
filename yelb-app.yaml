@@ -87,7 +87,7 @@ spec:
       containers:
       - name: yelb-ui
 #        image:  harbor.corp.local/library/restreview-ui:V1
-	image: mreferre/yelb-ui:0.3
+        image: mreferre/yelb-ui:0.3
         ports:
         - containerPort: 80
 ---
@@ -107,7 +107,7 @@ spec:
       containers:
       - name: redis-server
 #        image: harbor.corp.local/library/restreview-redis:V1
-	image: redis:4.0.2
+        image: redis:4.0.2
         ports:
         - containerPort: 6379
 ---
@@ -127,7 +127,7 @@ spec:
       containers:
       - name: yelb-db
 #        image:  harbor.corp.local/library/restreview-db:V1
-	image: mreferre/yelb-db:0.3
+        image: mreferre/yelb-db:0.3
         ports:
         - containerPort: 5432
 ---
@@ -147,7 +147,7 @@ spec:
       containers:
       - name: yelb-appserver
 #        image:  harbor.corp.local/library/restreview-appserver:V2
-	image: mreferre/yelb-appserver:0.3
+        image: mreferre/yelb-appserver:0.3
         ports:
         - containerPort: 4567
 
