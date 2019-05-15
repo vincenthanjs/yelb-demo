@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: yelb-ui-ingress
+spec:
+  rules:
+    - host: test1.pks-cl01-apps.acepod.com
+      http:
+        paths:
+        - backend:
+            serviceName: yelb-ui
+            servicePort: 80
+
