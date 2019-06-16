@@ -71,7 +71,7 @@ metadata:
   name: yelb-ui
   namespace: yelb
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
